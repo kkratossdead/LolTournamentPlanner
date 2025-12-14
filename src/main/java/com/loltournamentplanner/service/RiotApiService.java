@@ -75,8 +75,6 @@ public class RiotApiService {
         String rank = "";
         int leaguePoints = 0;
 
-        // Step 3: Get League Data (Rank/Tier) using PUUID
-        // "/lol/league/v4/entries/by-puuid/{encryptedPUUID}"
         String leagueUrl = String.format("%s/lol/league/v4/entries/by-puuid/%s", 
                 activePlatformUrl, puuid);
         
@@ -101,9 +99,6 @@ public class RiotApiService {
         return new LoLAccount(puuid, returnedGameName, returnedTagLine, summonerLevel, tier, rank, leaguePoints, lastUpdated);
     }
 
-    /**
-     * Returns the latest match IDs for a given PUUID (EUROPE routing).
-     */
     public List<String> getLastMatchIds(String puuid, int count) throws IOException, InterruptedException {
         int safeCount = Math.max(1, Math.min(count, 20));
         String url = String.format("%s/lol/match/v5/matches/by-puuid/%s/ids?start=0&count=%d", REGION_URL, puuid, safeCount);
@@ -129,9 +124,6 @@ public class RiotApiService {
         return matchIds;
     }
 
-    /**
-     * Fetch full match details (participants + basic info) from match-v5 (EUROPE routing).
-     */
     public MatchDetails getMatchDetails(String matchId) throws IOException, InterruptedException {
         String url = String.format("%s/lol/match/v5/matches/%s", REGION_URL, matchId);
         JsonObject root = fetchJson(url);

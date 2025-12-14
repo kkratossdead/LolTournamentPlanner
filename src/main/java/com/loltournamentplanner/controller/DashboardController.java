@@ -65,10 +65,8 @@ public class DashboardController {
             updateLinkedAccountsList();
         }
         
-        // Load tournaments
         refreshTournamentList();
         
-        // Enable Join button only when a tournament is selected
         tournamentListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (joinTournamentButton != null) {
                 boolean disabled = (newVal == null) || (newVal.getStatus() != null && "CLOSED".equalsIgnoreCase(newVal.getStatus()));
@@ -76,7 +74,6 @@ public class DashboardController {
             }
         });
 
-        // Account Details Listener
         if (linkedAccountsListView != null) {
             linkedAccountsListView.setCellFactory(param -> new ListCell<LoLAccount>() {
                 private final Label label = new Label();
@@ -85,7 +82,7 @@ public class DashboardController {
 
                 {
                     pane.setAlignment(Pos.CENTER_LEFT);
-                    HBox.setHgrow(pane.getChildren().get(1), Priority.ALWAYS); // The Region acts as a spacer
+                    HBox.setHgrow(pane.getChildren().get(1), Priority.ALWAYS); 
                     deleteButton.setStyle("-fx-background-color: transparent; -fx-text-fill: red; -fx-font-weight: bold; -fx-cursor: hand; -fx-font-size: 14px;");
                     deleteButton.setOnAction(event -> {
                         LoLAccount account = getItem();
@@ -146,8 +143,6 @@ public class DashboardController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             User currentUser = UserSession.getInstance().getCurrentUser();
             if (currentUser != null) {
-                // We need to remove by PUUID to be safe, or rely on equals()
-                // Since LoLAccount doesn't override equals/hashCode, we should iterate and remove by PUUID
                 currentUser.getLinkedAccounts().removeIf(a -> a.getPuuid().equals(account.getPuuid()));
                 try {
                     authService.updateUser(currentUser);

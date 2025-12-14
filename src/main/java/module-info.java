@@ -4,7 +4,9 @@ module com.loltournamentplanner {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.net.http;
+    requires java.sql;
     requires com.google.gson;
+    requires mysql.connector.j;
 
     opens com.loltournamentplanner to javafx.fxml;
     opens com.loltournamentplanner.controller to javafx.fxml;
