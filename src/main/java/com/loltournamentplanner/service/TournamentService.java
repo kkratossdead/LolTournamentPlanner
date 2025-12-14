@@ -8,6 +8,9 @@ import com.loltournamentplanner.model.Tournament;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -47,6 +50,9 @@ public class TournamentService {
                     String name = parts[1];
                     String status = parts[2];
                     String participantsJson = parts[3];
+                    String description = parts.length >= 5 ? decode(parts[4]) : "";
+                    String startDate = parts.length >= 6 ? decode(parts[5]) : "";
+                    int maxParticipants = parts.length >= 7 ? safeParseInt(parts[6], 0) : 0;
 
                     Type listType = new TypeToken<List<String>>(){}.getType();
                     List<String> participantPuuids = gson.fromJson(participantsJson, listType);
@@ -55,7 +61,7 @@ public class TournamentService {
                         participantPuuids = new ArrayList<>();
                     }
 
-                    tournaments.add(new Tournament(id, name, status, participantPuuids));
+                    tournaments.add(new Tournament(id, name, status, participantPuuids, description, startDate, maxParticipants));
                 }
             }
         } catch (IOException e) {
@@ -70,6 +76,9 @@ public class TournamentService {
 
         for (Tournament t : allTournaments) {
             if (t.getId().equals(tournament.getId())) {
+                if (t.getStatus() != null && "CLOSED".equalsIgnoreCase(t.getStatus())) {
+                    throw new IOException("Tournament is closed");
+                }
                 if (!t.getParticipantPuuids().contains(account.getPuuid())) {
                     t.addParticipant(account.getPuuid());
                     updated = true;
@@ -90,8 +99,35 @@ public class TournamentService {
             sb.append(t.getId()).append(DELIMITER)
               .append(t.getName()).append(DELIMITER)
               .append(t.getStatus()).append(DELIMITER)
-              .append(participantsJson).append(System.lineSeparator());
+              .append(participantsJson).append(DELIMITER)
+              .append(encode(nullToEmpty(t.getDescription()))).append(DELIMITER)
+              .append(encode(nullToEmpty(t.getStartDate()))).append(DELIMITER)
+              .append(t.getMaxParticipants()).append(System.lineSeparator());
         }
         Files.writeString(Path.of(CSV_FILE), sb.toString(), StandardOpenOption.TRUNCATE_EXISTING);
+    }
+
+    private static int safeParseInt(String value, int defaultValue) {
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+    private static String encode(String value) {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8);
+    }
+
+    private static String decode(String value) {
+        try {
+            return URLDecoder.decode(value, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            return value;
+        }
+    }
+
+    private static String nullToEmpty(String value) {
+        return value == null ? "" : value;
     }
 }

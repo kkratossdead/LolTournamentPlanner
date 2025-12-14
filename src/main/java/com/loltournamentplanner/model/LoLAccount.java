@@ -8,6 +8,7 @@ public class LoLAccount {
     private String tier;
     private String rank;
     private int leaguePoints;
+    private String lastUpdated;
 
     public LoLAccount(String puuid, String gameName, String tagLine, int summonerLevel, String tier, String rank, int leaguePoints) {
         this.puuid = puuid;
@@ -17,6 +18,18 @@ public class LoLAccount {
         this.tier = tier;
         this.rank = rank;
         this.leaguePoints = leaguePoints;
+        this.lastUpdated = "";
+    }
+
+    public LoLAccount(String puuid, String gameName, String tagLine, int summonerLevel, String tier, String rank, int leaguePoints, String lastUpdated) {
+        this.puuid = puuid;
+        this.gameName = gameName;
+        this.tagLine = tagLine;
+        this.summonerLevel = summonerLevel;
+        this.tier = tier;
+        this.rank = rank;
+        this.leaguePoints = leaguePoints;
+        this.lastUpdated = lastUpdated;
     }
 
     // Getters and Setters
@@ -34,6 +47,8 @@ public class LoLAccount {
     public void setRank(String rank) { this.rank = rank; }
     public int getLeaguePoints() { return leaguePoints; }
     public void setLeaguePoints(int leaguePoints) { this.leaguePoints = leaguePoints; }
+    public String getLastUpdated() { return lastUpdated; }
+    public void setLastUpdated(String lastUpdated) { this.lastUpdated = lastUpdated; }
 
     @Override
     public String toString() {

@@ -9,17 +9,18 @@ import com.loltournamentplanner.service.TournamentService;
 import com.loltournamentplanner.service.UserSession;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
+import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.geometry.Pos;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +71,8 @@ public class DashboardController {
         // Enable Join button only when a tournament is selected
         tournamentListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (joinTournamentButton != null) {
-                joinTournamentButton.setDisable(newVal == null);
+                boolean disabled = (newVal == null) || (newVal.getStatus() != null && "CLOSED".equalsIgnoreCase(newVal.getStatus()));
+                joinTournamentButton.setDisable(disabled);
             }
         });
 
@@ -126,7 +128,7 @@ public class DashboardController {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                     Tournament selectedTournament = tournamentListView.getSelectionModel().getSelectedItem();
                     if (selectedTournament != null) {
-                        showTournamentDetails(selectedTournament);
+                        openTournamentDetailsWindow(selectedTournament);
                     }
                 }
             });
@@ -191,6 +193,11 @@ public class DashboardController {
         User currentUser = UserSession.getInstance().getCurrentUser();
         
         if (selectedTournament == null || currentUser == null) return;
+
+        if (selectedTournament.getStatus() != null && "CLOSED".equalsIgnoreCase(selectedTournament.getStatus())) {
+            showAlert(Alert.AlertType.WARNING, "Tournament Closed", "This tournament is closed and cannot be joined.");
+            return;
+        }
         
         List<LoLAccount> accounts = currentUser.getLinkedAccounts();
         if (accounts.isEmpty()) {
@@ -234,43 +241,41 @@ public class DashboardController {
     }
     
     private void showAccountDetails(LoLAccount account) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Account Details");
-        alert.setHeaderText(account.getGameName() + " #" + account.getTagLine());
-        
-        String rankInfo = "UNRANKED";
-        if (account.getTier() != null && !"UNRANKED".equals(account.getTier())) {
-            rankInfo = account.getTier() + " " + account.getRank() + " (" + account.getLeaguePoints() + " LP)";
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/loltournamentplanner/view/account-details-view.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 420);
+
+            AccountDetailsController controller = loader.getController();
+            controller.setAccount(account);
+
+            Stage stage = new Stage();
+            stage.setTitle("Account Details");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to open account details: " + e.getMessage());
+            e.printStackTrace();
         }
-        
-        alert.setContentText(
-                "Rank: " + rankInfo + "\n" +
-                "Summoner Level: " + account.getSummonerLevel() + "\n" +
-                "PUUID: " + account.getPuuid()
-        );
-        alert.showAndWait();
     }
 
-    private void showTournamentDetails(Tournament tournament) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Tournament Details");
-        alert.setHeaderText(tournament.getName());
+    private void openTournamentDetailsWindow(Tournament tournament) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/loltournamentplanner/view/tournament-details-view.fxml"));
+            Scene scene = new Scene(loader.load(), 720, 560);
 
-        List<String> participants = tournament.getParticipantPuuids();
-        List<String> participantNames = new ArrayList<>();
+            TournamentDetailsController controller = loader.getController();
+            controller.setTournament(tournament);
 
-        for (String puuid : participants) {
-            LoLAccount account = authService.findAccountByPuuid(puuid);
-            if (account != null) {
-                participantNames.add(account.getGameName() + " #" + account.getTagLine());
-            } else {
-                participantNames.add(puuid);
-            }
+            Stage stage = new Stage();
+            stage.setTitle("Tournament Details");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to open tournament details: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        String participantInfo = participantNames.isEmpty() ? "No participants yet." : String.join(", ", participantNames);
-        alert.setContentText("Participants: " + participantInfo);
-        alert.showAndWait();
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

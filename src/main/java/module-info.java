@@ -1,4 +1,6 @@
 module com.loltournamentplanner {
+    requires javafx.base;
+    requires transitive javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
     requires java.net.http;
