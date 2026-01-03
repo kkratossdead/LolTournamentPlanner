@@ -1,0 +1,683 @@
+/*
+ * LoL Tournament Planner - Dark Theme
+ * Elegant & Modern Design with Animations
+ */
+
+/* ===== ROOT / VARIABLES ===== */
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    
+    /* Primary Colors */
+    -lol-bg-primary: #0A1428;
+    -lol-bg-secondary: #1E2328;
+    -lol-bg-tertiary: #3C3C41;
+    
+    /* Accent Colors */
+    -lol-gold: #C89B3C;
+    -lol-gold-dark: #785A28;
+    -lol-gold-light: #F0E6D2;
+    -lol-cyan: #0AC8B9;
+    
+    /* Text Colors */
+    -lol-text-primary: #F0E6D2;
+    -lol-text-secondary: #A09B8C;
+    -lol-text-dark: #0A1428;
+    
+    /* State Colors */
+    -lol-error: #E84057;
+    -lol-success: #0ACF83;
+    
+    /* Borders */
+    -lol-border: #3C3C41;
+    -lol-border-gold: #785A28;
+}
+
+/* ===== BASE STYLES ===== */
+.app-root {
+    -fx-background-color: -lol-bg-primary;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -lol-text-primary;
+}
+
+.subtitle {
+    -fx-font-size: 16px;
+    -fx-font-weight: normal;
+    -fx-text-fill: -lol-text-secondary;
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -lol-gold;
+}
+
+.label {
+    -fx-text-fill: -lol-text-primary;
+}
+
+/* ===== CARDS ===== */
+.card {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-background-radius: 8px;
+    -fx-border-color: -lol-border;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 12, 0, 0, 4);
+}
+
+.card:hover {
+    -fx-border-color: -lol-border-gold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 16, 0, 0, 6);
+}
+
+/* ===== PRIMARY BUTTON ===== */
+.primary-button {
+    -fx-background-color: linear-gradient(to bottom, #C89B3C, #A07A2E);
+    -fx-background-radius: 4px;
+    -fx-border-color: #785A28;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -lol-text-dark;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 24px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(200, 155, 60, 0.3), 8, 0, 0, 2);
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #D4A94A, #B8892F);
+    -fx-effect: dropshadow(gaussian, rgba(200, 155, 60, 0.5), 12, 0, 0, 3);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.primary-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #A07A2E, #785A28);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.primary-button:disabled {
+    -fx-background-color: #3C3C41;
+    -fx-text-fill: #6B6B6B;
+    -fx-border-color: #3C3C41;
+    -fx-effect: none;
+    -fx-opacity: 0.7;
+}
+
+/* ===== SECONDARY BUTTON ===== */
+.secondary-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4px;
+    -fx-border-color: -lol-gold;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -lol-gold;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 24px;
+    -fx-cursor: hand;
+}
+
+.secondary-button:hover {
+    -fx-background-color: rgba(200, 155, 60, 0.15);
+    -fx-border-color: #D4A94A;
+    -fx-text-fill: #D4A94A;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.secondary-button:pressed {
+    -fx-background-color: rgba(200, 155, 60, 0.25);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.secondary-button:disabled {
+    -fx-border-color: #3C3C41;
+    -fx-text-fill: #6B6B6B;
+    -fx-opacity: 0.7;
+}
+
+/* ===== FORM FIELDS (TextField, PasswordField) ===== */
+.form-field {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-background-radius: 4px;
+    -fx-border-color: -lol-border;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -lol-text-primary;
+    -fx-prompt-text-fill: -lol-text-secondary;
+    -fx-padding: 10px 14px;
+    -fx-font-size: 14px;
+}
+
+.form-field:hover {
+    -fx-border-color: #5C5C61;
+}
+
+.form-field:focused {
+    -fx-border-color: -lol-gold;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(200, 155, 60, 0.2), 8, 0, 0, 0);
+}
+
+/* TextArea specific */
+.text-area.form-field {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.text-area.form-field .content {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.text-area.form-field .scroll-pane {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.text-area.form-field .scroll-pane .viewport {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+/* ===== LIST VIEW ===== */
+.list-view {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-background-radius: 4px;
+    -fx-border-color: -lol-border;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-padding: 4px;
+}
+
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -lol-text-primary;
+    -fx-padding: 10px 14px;
+    -fx-background-radius: 4px;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: -lol-bg-tertiary;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: rgba(200, 155, 60, 0.2);
+    -fx-border-color: transparent transparent transparent -lol-gold;
+    -fx-border-width: 0 0 0 3px;
+}
+
+.list-view .list-cell:selected:hover {
+    -fx-background-color: rgba(200, 155, 60, 0.3);
+}
+
+.list-view .list-cell:empty {
+    -fx-background-color: transparent;
+}
+
+/* List View Scrollbar */
+.list-view .scroll-bar:vertical {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-padding: 2px;
+}
+
+.list-view .scroll-bar:vertical .track {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-background-radius: 4px;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: -lol-border;
+    -fx-background-radius: 4px;
+}
+
+.list-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #5C5C61;
+}
+
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.list-view .scroll-bar:vertical .increment-arrow,
+.list-view .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* ===== SCROLL PANE ===== */
+.scroll-pane {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.scroll-bar {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.scroll-bar .track {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: -lol-border;
+    -fx-background-radius: 4px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #5C5C61;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+}
+
+/* ===== COMBO BOX ===== */
+.combo-box {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-background-radius: 4px;
+    -fx-border-color: -lol-border;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: -lol-text-primary;
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: -lol-text-secondary;
+}
+
+.combo-box:hover {
+    -fx-border-color: #5C5C61;
+}
+
+.combo-box:focused {
+    -fx-border-color: -lol-gold;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-border-color: -lol-border;
+}
+
+/* ===== CHECK BOX ===== */
+.check-box {
+    -fx-text-fill: -lol-text-primary;
+}
+
+.check-box .box {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-border-color: -lol-border;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.check-box:hover .box {
+    -fx-border-color: -lol-gold;
+}
+
+.check-box:selected .box {
+    -fx-background-color: -lol-gold;
+    -fx-border-color: -lol-gold;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: -lol-text-dark;
+}
+
+/* ===== TOOLTIP ===== */
+.tooltip {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-text-fill: -lol-text-primary;
+    -fx-border-color: -lol-border-gold;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 8px 12px;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 2);
+}
+
+/* ===== GRID PANE LABELS ===== */
+.grid-pane .label {
+    -fx-text-fill: -lol-text-primary;
+}
+
+/* ===== SEPARATOR ===== */
+.separator .line {
+    -fx-border-color: -lol-border;
+    -fx-border-width: 1px 0 0 0;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+    -fx-background-color: -lol-bg-tertiary;
+    -fx-background-radius: 4px;
+}
+
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #785A28, #C89B3C);
+    -fx-background-radius: 4px;
+}
+
+.progress-bar .track {
+    -fx-background-color: -lol-bg-tertiary;
+    -fx-background-radius: 4px;
+}
+
+/* ===== TAB PANE ===== */
+.tab-pane .tab-header-area {
+    -fx-background-color: -lol-bg-primary;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: -lol-bg-primary;
+}
+
+.tab-pane .tab {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-background-radius: 4px 4px 0 0;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: -lol-bg-tertiary;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-text-fill: -lol-text-primary;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: -lol-gold;
+}
+
+/* ===== CONTEXT MENU ===== */
+.context-menu {
+    -fx-background-color: -lol-bg-secondary;
+    -fx-border-color: -lol-border;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 12, 0, 0, 4);
+}
+
+.context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 8px 16px;
+}
+
+.context-menu .menu-item:hover,
+.context-menu .menu-item:focused {
+    -fx-background-color: -lol-bg-tertiary;
+}
+
+.context-menu .menu-item .label {
+    -fx-text-fill: -lol-text-primary;
+}
+
+/* ===== DIALOG PANE ===== */
+.dialog-pane {
+    -fx-background-color: -lol-bg-primary;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: -lol-bg-secondary;
+}
+
+.dialog-pane .content.label {
+    -fx-text-fill: -lol-text-primary;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-gold {
+    -fx-text-fill: -lol-gold;
+}
+
+.text-cyan {
+    -fx-text-fill: -lol-cyan;
+}
+
+.text-error {
+    -fx-text-fill: -lol-error;
+}
+
+.text-success {
+    -fx-text-fill: -lol-success;
+}
+
+.text-secondary {
+    -fx-text-fill: -lol-text-secondary;
+}
+
+.text-bold {
+    -fx-font-weight: bold;
+}
+
+/* ===== DANGER BUTTON ===== */
+.danger-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4px;
+    -fx-border-color: -lol-error;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -lol-error;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 24px;
+    -fx-cursor: hand;
+}
+
+.danger-button:hover {
+    -fx-background-color: rgba(232, 64, 87, 0.15);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.danger-button:pressed {
+    -fx-background-color: rgba(232, 64, 87, 0.25);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* ===== SUCCESS BUTTON ===== */
+.success-button {
+    -fx-background-color: linear-gradient(to bottom, #0ACF83, #08A066);
+    -fx-background-radius: 4px;
+    -fx-border-color: #08A066;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-text-fill: -lol-text-dark;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 24px;
+    -fx-cursor: hand;
+}
+
+.success-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #0DE092, #0ACF83);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* ===== ICON BUTTON ===== */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-padding: 8px;
+    -fx-cursor: hand;
+}
+
+.icon-button:hover {
+    -fx-background-color: -lol-bg-tertiary;
+}
+
+/* ===== STATUS BADGES ===== */
+.badge {
+    -fx-background-radius: 12px;
+    -fx-padding: 4px 12px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.badge-open {
+    -fx-background-color: rgba(10, 207, 131, 0.2);
+    -fx-text-fill: -lol-success;
+}
+
+.badge-closed {
+    -fx-background-color: rgba(232, 64, 87, 0.2);
+    -fx-text-fill: -lol-error;
+}
+
+.badge-pending {
+    -fx-background-color: rgba(200, 155, 60, 0.2);
+    -fx-text-fill: -lol-gold;
+}
+
+/* ===== META LABEL ===== */
+.meta-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -lol-text-secondary;
+    -fx-font-style: italic;
+}
+
+/* ===== LOGIN CARD ===== */
+.login-card {
+    -fx-min-width: 380px;
+}
+
+.login-card:hover {
+    -fx-border-color: -lol-border;
+}
+
+/* ===== FIELD LABEL ===== */
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -lol-text-secondary;
+}
+
+/* ===== ERROR LABEL ===== */
+.error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -lol-error;
+    -fx-padding: 2px 0 0 0;
+}
+
+/* ===== SUCCESS LABEL ===== */
+.success-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -lol-success;
+    -fx-padding: 2px 0 0 0;
+}
+
+/* ===== FIELD ERROR STATE ===== */
+.field-error {
+    -fx-border-color: -lol-error;
+}
+
+.field-error:focused {
+    -fx-border-color: -lol-error;
+    -fx-effect: dropshadow(gaussian, rgba(232, 64, 87, 0.3), 8, 0, 0, 0);
+}
+
+/* ===== LINK LABEL ===== */
+.link-label {
+    -fx-text-fill: -lol-gold;
+    -fx-cursor: hand;
+    -fx-underline: false;
+}
+
+.link-label:hover {
+    -fx-text-fill: #D4A94A;
+    -fx-underline: true;
+}
+
+/* ===== PASSWORD STRENGTH BAR ===== */
+.password-strength-bar {
+    -fx-accent: -lol-text-secondary;
+    -fx-background-color: -lol-bg-tertiary;
+    -fx-background-radius: 3px;
+}
+
+.password-strength-bar .bar {
+    -fx-background-color: -lol-text-secondary;
+    -fx-background-radius: 3px;
+    -fx-background-insets: 0;
+}
+
+.password-strength-bar .track {
+    -fx-background-color: -lol-bg-tertiary;
+    -fx-background-radius: 3px;
+}
+
+/* Password strength colors */
+.password-strength-bar.strength-weak .bar {
+    -fx-background-color: -lol-error;
+}
+
+.password-strength-bar.strength-fair .bar {
+    -fx-background-color: #F5A623;
+}
+
+.password-strength-bar.strength-strong .bar {
+    -fx-background-color: #7ED321;
+}
+
+.password-strength-bar.strength-very-strong .bar {
+    -fx-background-color: -lol-success;
+}
+
+/* Password strength label */
+.password-strength-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -lol-text-secondary;
+}
+
+.password-strength-label.strength-weak {
+    -fx-text-fill: -lol-error;
+}
+
+.password-strength-label.strength-fair {
+    -fx-text-fill: #F5A623;
+}
+
+.password-strength-label.strength-strong {
+    -fx-text-fill: #7ED321;
+}
+
+.password-strength-label.strength-very-strong {
+    -fx-text-fill: -lol-success;
+}
+
+/* ===== ANIMATIONS ===== */
+/* Note: JavaFX CSS animations are limited, but transitions work on supported properties */
+/* Scale and opacity transitions are handled by pseudo-classes above */

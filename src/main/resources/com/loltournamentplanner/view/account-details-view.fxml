@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.loltournamentplanner.controller.AccountDetailsController" stylesheets="@styles.css" styleClass="app-root">
+    <padding>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="6.0">
+            <Label fx:id="accountTitleLabel" text="Account" styleClass="title"/>
+            <Label text="Account details" styleClass="subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="12.0" BorderPane.alignment="CENTER" styleClass="card">
+            <GridPane hgap="12.0" vgap="8.0">
+                <Label text="Summoner level:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                <Label fx:id="summonerLevelLabel" text="0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Rank:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                <Label fx:id="rankLabel" text="UNRANKED" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="LP:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lpLabel" text="—" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Last updated:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                <Label fx:id="lastUpdatedLabel" text="—" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="PUUID:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                <Label fx:id="puuidLabel" text="—" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            </GridPane>
+
+            <VBox spacing="6.0" VBox.vgrow="ALWAYS">
+                <Label text="Last 3 matches" styleClass="card-title"/>
+                <ListView fx:id="matchesListView" prefHeight="180.0" VBox.vgrow="ALWAYS" styleClass="list-view"/>
+                <Label text="Tip: double-click a match to open details." styleClass="meta-label"/>
+            </VBox>
+
+            <HBox spacing="10.0">
+                <Button fx:id="copyPuuidButton" text="Copy PUUID" onAction="#onCopyPuuid" styleClass="secondary-button"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="closeButton" text="Close" onAction="#onClose" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.loltournamentplanner.controller.DashboardController" stylesheets="@styles.css" styleClass="app-root">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <Label fx:id="welcomeLabel" text="Dashboard" styleClass="title"/>
+
+    <VBox spacing="10.0" styleClass="card">
+        <Label text="Link LoL Account" style="-fx-font-weight: bold;"/>
+        <HBox spacing="10.0">
+            <TextField fx:id="gameNameField" promptText="Game Name" styleClass="form-field"/>
+            <TextField fx:id="tagLineField" promptText="Tag Line" styleClass="form-field"/>
+            <Button text="Link Account" onAction="#onLinkAccount" styleClass="primary-button"/>
+        </HBox>
+        <Label text="Linked Accounts:"/>
+        <ListView fx:id="linkedAccountsListView" prefHeight="200.0" styleClass="list-view"/>
+    </VBox>
+
+    <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+        <Label text="Tournaments" styleClass="card-title"/>
+        <ListView fx:id="tournamentListView" VBox.vgrow="ALWAYS" styleClass="list-view"/>
+        <Button fx:id="joinTournamentButton" text="Join Tournament" onAction="#onJoinTournament" disable="true" styleClass="primary-button"/>
+    </VBox>
+</VBox>
